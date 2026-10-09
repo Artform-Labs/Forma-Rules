@@ -13,4 +13,4 @@ A `needs_confirmation` record also has `question`, which is the open point for A
 
 `confirmed_on` is set only when Austin confirmed the rule on 2026-10-09 and the drawings do not contradict it.
 
-The Artform-Labs/Auditor documents (`PANEL-FABRICATION-STANDARDS.md` and the FOLDR checklists) were not readable from this environment (repository not found). Foldr V1.4 is outdated on return-bottom weep location, so that checklist was not used. The return-bottom weep rule here is Austin's 2026-10-09 confirmation.
+`PANEL-FABRICATION-STANDARDS.md` from Auditor is cited for V.1.R only. Rules that come from it say so in the statement and in `sources`. The Foldr V1.4 checklist was not in that file. It is outdated on return-bottom weep location, so it was not used. The return-bottom weep rule here is Austin's 2026-10-09 confirmation.
