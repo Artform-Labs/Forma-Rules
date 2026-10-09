@@ -1,0 +1,298 @@
+rules:
+  - id: layers.atp-production-layers
+    status: confirmed
+    statement: >
+      The D20 ATP production layers in D20_AutoCAD_Audit_Visual_v0_8_2.lsp are
+      the router layer, the open-offset layer (legacy spelling), the rivet
+      drill-center layer, the weep drill-center layer, and the panel-id
+      layer: "ACM_Layer 1_Router Offset_Panel Cut",
+      "ACM_Layer 3_Open Offset Countour_Route Lines",
+      "ACM_Layer 4_Drill Centers_Rivet Holes",
+      "ACM_Layer 5_Drill Centers_Weep Holes", and "Q-SPCQ-IDEN".
+      ATP export keeps entities on those layers and drops DIMENSION and INSERT
+      entities. The id-layer name is not in the SOP DXF; see
+      layers.id-layer-name.
+    sources:
+      - file: D20_AutoCAD_Audit_Visual_v0_8_2.lsp
+        drawing: n/a
+        location: D20:ROUTER_LAYER, D20:OPEN_LAYER, D20:RIVET_LAYER, D20:WEEP_LAYER, D20:ID_LAYER, and D20:ATP_LAYERS
+      - file: README_D20_AutoCAD_Audit_Install.txt
+        drawing: n/a
+        location: Section "DEFAULT ARTFORM LAYER CONTRACT"
+
+  - id: layers.open-offset-spelling
+    status: confirmed
+    statement: >
+      The EnRoute open-offset layer name keeps the spelling "Countour":
+      "ACM_Layer 3_Open Offset Countour_Route Lines". The install note accepts
+      "ACM_Layer 3_Open Offset Contour_Route Lines" as an alias. The SOP DXF
+      contains the Countour layer 3. It also contains a different layer,
+      "ACM_Layer 7_Open Offset Contour_Sheet Cut Off", which uses the corrected
+      spelling and is the sheet cut-off layer, not the layer 3 alias.
+    sources:
+      - file: D20_AutoCAD_Audit_Visual_v0_8_2.lsp
+        drawing: n/a
+        location: D20:OPEN_LAYER comment "existing spelling preserved"
+      - file: README_D20_AutoCAD_Audit_Install.txt
+        drawing: n/a
+        location: Legacy Countour spelling and Contour alias
+      - file: D20 SOP 24-2 AUTOCAD FORMA.dxf
+        drawing: D20 SOP 24-2 AUTOCAD FORMA
+        location: LAYER table entries for layer 3 and layer 7
+
+  - id: layers.sop-layer-table
+    status: confirmed
+    statement: >
+      The SOP DXF layer table, with AutoCAD color index, is:
+      ACM_Layer 1_Router Offset_Panel Cut (1),
+      ACM_LAYER 2_135 degree_ROUTE (5),
+      ACM_Layer 3_Open Offset Countour_Route Lines (4),
+      ACM_Layer 4_Drill Centers_Rivet Holes (3),
+      ACM_Layer 5_Drill Centers_Weep Holes (6),
+      ACM_Layer 6_Router Offset Female_Panel Labels (3),
+      ACM_Layer 7_Open Offset Contour_Sheet Cut Off (30),
+      01_Perimeter Cut (1),
+      02_Engrave Annotation (3),
+      03_V-Groove (4),
+      Circles_0.125 (30),
+      0-DIMS (6), 0-TEXT (2), 0-Plate (7), DIMENSIONS (241), NOTES (2).
+      Layer 2's name uses "ACM_LAYER" rather than "ACM_Layer". What layer 2
+      and Circles_0.125 are for is layers.undeclared-sop-layers.
+    sources:
+      - file: D20 SOP 24-2 AUTOCAD FORMA.dxf
+        drawing: D20 SOP 24-2 AUTOCAD FORMA
+        location: LAYER table names and group-62 colors
+
+  - id: layers.id-layer-name
+    status: needs_confirmation
+    statement: >
+      The audit tool requires panel labels on Q-SPCQ-IDEN. A label that
+      contains a dot counts as a prefixed label. A numeric label with no dot
+      (patterns #, #?##, ##, ###) is a suffix-only warning, issue code
+      SUFFIX_ONLY_LABEL. The SOP does not contain the string Q-SPCQ-IDEN.
+      It says "PANEL LABEL ON CORRECT LAYER" and places sample text "X.XX"
+      on ACM_Layer 6_Router Offset Female_Panel Labels and on
+      02_Engrave Annotation, plus a job mark "WT6.45" on 02_Engrave Annotation.
+      V.1.R-3D calls out "ENGRAVED LABEL".
+    question: >
+      Which layer is the current panel-id layer for ATP: Q-SPCQ-IDEN,
+      ACM_Layer 6_Router Offset Female_Panel Labels, or 02_Engrave Annotation?
+    sources:
+      - file: D20_AutoCAD_Audit_Visual_v0_8_2.lsp
+        drawing: n/a
+        location: D20:ID_LAYER "Q-SPCQ-IDEN"; D20:suffix-only-p; issue SUFFIX_ONLY_LABEL
+      - file: D20 SOP 24-2 AUTOCAD FORMA.dxf
+        drawing: D20 SOP 24-2 AUTOCAD FORMA
+        location: >
+          Layer 6 and 02_Engrave Annotation text; multileader "PANEL LABEL ON
+          CORRECT LAYER". Q-SPCQ-IDEN is absent from the file.
+      - file: V.1.R-3D.pdf
+        drawing: V.1.R-3D
+        location: Callout ENGRAVED LABEL
+
+  - id: layers.undeclared-sop-layers
+    status: needs_confirmation
+    statement: >
+      The SOP defines ACM_LAYER 2_135 degree_ROUTE and Circles_0.125 and does
+      not say when either is used. Circles_0.125 holds circles of radius
+      0.0625, the same radius as the rivet drill-center circles. Those
+      Circles_0.125 entities are inside a block, not model-space drill centers.
+    question: >
+      When is the 135 degree route layer used, and is Circles_0.125 a legacy
+      rivet symbol rather than a production ATP layer?
+    sources:
+      - file: D20 SOP 24-2 AUTOCAD FORMA.dxf
+        drawing: D20 SOP 24-2 AUTOCAD FORMA
+        location: LAYER table entries ACM_LAYER 2_135 degree_ROUTE and Circles_0.125
+
+  - id: atp.readiness-no-while-blocks-or-open-router
+    status: confirmed
+    statement: >
+      ATP readiness is NO while any block INSERT remains or router geometry
+      is not a provably closed contour. D20ATPREADY prints NO when the audit
+      has any FAIL. Remaining inserts raise FAIL issue
+      BLOCKS_REMAIN_ATP_BLOCKER. Each insert also raises WARN
+      BLOCK_INSERT_FOUND. An open router LWPOLYLINE raises FAIL
+      OPEN_ROUTER_LWPOLYLINE. The handoff states the same gate for v0.9.0.
+      A 0.8.0 audit log of 78091 WT1.06 counted block inserts as warnings
+      and recorded fail_count 0. The current gate is the 0.8.2 FAIL, not that
+      older log.
+    sources:
+      - file: Project Handoff.md
+        drawing: n/a
+        location: >
+          Known issues 2 and 5, and the v0.9.0 target "ATP readiness should
+          remain NO while blocks remain or router geometry is not provably closed."
+      - file: D20_AutoCAD_Audit_Visual_v0_8_2.lsp
+        drawing: n/a
+        location: c:D20ATPREADY; issues BLOCKS_REMAIN_ATP_BLOCKER, BLOCK_INSERT_FOUND, OPEN_ROUTER_LWPOLYLINE
+      - file: 78091_WT1.06_062626 V2_20260626_135429_summary.csv
+        drawing: 78091_WT1.06_062626 V2
+        location: audit_version 0.8.0, block_insert_count 20, fail_count 0
+
+  - id: atp.v2rb-split-open-polylines
+    status: confirmed
+    statement: >
+      A V.2.RB router contour can export as two open LWPOLYLINEs that share
+      endpoints. That pair is FAIL issue SPLIT_ROUTER_PAIR_SHARED_ENDPOINTS.
+      It is not a closed contour until the pair is joined. D20FIX_ROUTER_SPLITS
+      may join an approved pair into one closed LWPOLYLINE and move the
+      originals to D20_BACKUP_ORIGINAL_ROUTER, only after the user types YES.
+      The WO4.02 audit log shows this pair on
+      ACM_Layer 1_Router Offset_Panel Cut. The handoff names 78091 WO4.2 as
+      the direct-geometry example of this export.
+    sources:
+      - file: Project Handoff.md
+        drawing: n/a
+        location: Known issue 3, V.2.RB open shared-endpoint LWPOLYLINE pairs; known issue 1, 78091 WO4.2
+      - file: D20_AutoCAD_Audit_Visual_v0_8_2.lsp
+        drawing: n/a
+        location: Issue SPLIT_ROUTER_PAIR_SHARED_ENDPOINTS; c:D20FIX_ROUTER_SPLITS
+      - file: WO4.02 RAW DWG_20260625_100130_issue_log.csv
+        drawing: WO4.02 RAW DWG
+        location: OPEN_ROUTER_LWPOLYLINE and SPLIT_ROUTER_PAIR_SHARED_ENDPOINTS on the router layer
+
+  - id: atp.v1rb-router-line-chains
+    status: confirmed
+    statement: >
+      A V.1.RB router contour can export as LINE chains that are not closed
+      loops. LINE entities on the router layer are not closed LWPOLYLINEs.
+      An unpaired LINE endpoint raises FAIL
+      OPEN_ROUTER_LINE_CHAIN_ENDPOINT. The test checklist's older name for
+      this condition is ROUTER_LAYER_CONTAINS_LINE_CHAINS. The 0.8.2 tool
+      emits OPEN_ROUTER_LINE_CHAIN_ENDPOINT.
+    sources:
+      - file: Project Handoff.md
+        drawing: n/a
+        location: Known issue 4, V.1.RB LINE chains that are not closed loops
+      - file: D20_AutoCAD_Audit_Visual_v0_8_2.lsp
+        drawing: n/a
+        location: D20:flag-router-line-open-endpoints; issue OPEN_ROUTER_LINE_CHAIN_ENDPOINT
+      - file: D20_Audit_Test_Checklist.txt
+        drawing: n/a
+        location: Issue code ROUTER_LAYER_CONTAINS_LINE_CHAINS
+
+  - id: atp.one-closed-contour-per-panel
+    status: confirmed
+    statement: >
+      EnRoute should receive one closed router contour per panel. Closed
+      means LWPOLYLINE flag bit 1 is set. If the Q-SPCQ-IDEN label count
+      does not equal the closed router LWPOLYLINE count, the audit raises
+      LABEL_COUNT_ROUTER_CONTOUR_COUNT_MISMATCH. That issue is FAIL when any
+      router LWPOLYLINE is open, any LINE-chain endpoint is unpaired, or the
+      closed-contour count is zero. Otherwise it is WARN.
+    sources:
+      - file: D20_AutoCAD_Audit_Visual_v0_8_2.lsp
+        drawing: n/a
+        location: >
+          D20:closed-lwpoly-p; OPEN_ROUTER_LWPOLYLINE detail text; issue
+          LABEL_COUNT_ROUTER_CONTOUR_COUNT_MISMATCH
+
+  - id: atp.dxf-must-be-real-dxf
+    status: confirmed
+    statement: >
+      An ATP DXF export must be a real DXF. A DWG saved with a .dxf suffix
+      is not a DXF. D20:dxf-file-p rejects a file whose first line starts with
+      "AC", which is how a DWG header begins. D20:save-current-as-dxf uses
+      SAVEAS with format DXF rather than renaming the DWG. The handoff lists
+      this as known issue 7. One handoff artifact that shows the bad pattern
+      is named "78091_WT1.06_062626 V3_20260626_144141_ATP_READY.dxf.dwg".
+    sources:
+      - file: Project Handoff.md
+        drawing: n/a
+        location: Known issue 7, "DXF export must create a true DXF, not a DWG with a .dxf suffix."
+      - file: D20_AutoCAD_Audit_Visual_v0_8_2.lsp
+        drawing: n/a
+        location: D20:dxf-file-p and D20:save-current-as-dxf; command D20EXPORT_ATP_DXF
+      - file: 78091_WT1.06_062626 V3_20260626_144141_ATP_READY.dxf.dwg
+        drawing: 78091_WT1.06_062626 V3
+        location: Handoff filename is a DWG whose name contains .dxf
+
+  - id: atp.export-blocked-on-fail
+    status: confirmed
+    statement: >
+      D20EXPORT_ATP and the DXF package export are blocked while any FAIL
+      remains. The status string is NOT_READY when any FAIL exists,
+      READY_WITH_WARNINGS when there are warnings and no failures, and READY
+      when there are neither. A blocked export proceeds only if the operator
+      types EXPORTANYWAY, and that file is review-only. Warnings alone do not
+      force ATP readiness to NO.
+    sources:
+      - file: D20_AutoCAD_Audit_Visual_v0_8_2.lsp
+        drawing: n/a
+        location: D20:export-atp-dwg and D20:export-atp-package status and EXPORTANYWAY prompt
+
+  - id: atp.qc-layers-stay-unmapped
+    status: confirmed
+    statement: >
+      Audit overlay layers are not production toolpaths. Their names and
+      color indexes are D20_QC_FAIL (30), D20_QC_WARN (6), D20_QC_INFO (4),
+      D20_QC_DASHBOARD (3), and D20_BACKUP_ORIGINAL_ROUTER (8). D20_QC_* layers
+      stay unmapped in EnRoute. D20CLEARQC deletes D20_QC_* entities and does
+      not delete the backup layer.
+    sources:
+      - file: D20_AutoCAD_Audit_Visual_v0_8_2.lsp
+        drawing: n/a
+        location: D20:setup-layers; c:D20AUDITHELP note "Keep D20_QC_* layers unmapped in EnRoute."; c:D20CLEARQC
+
+  - id: atp.hole-entities-circle-or-ellipse
+    status: confirmed
+    statement: >
+      Rivet and weep drill centers are counted as CIRCLE or ELLIPSE on their
+      drill-center layers. The 78091 WT1.06 V2 audit summary recorded both
+      (rivet circles 962, rivet ellipses 333, weep circles 19, weep ellipses 5).
+      The 0.8.2 scan does not fail other entity types on those layers. Whether
+      a non-circle entity must fail is atp.checks-described-but-not-in-v082.
+    sources:
+      - file: D20_AutoCAD_Audit_Visual_v0_8_2.lsp
+        drawing: n/a
+        location: Rivet and weep CIRCLE and ELLIPSE counters in D20:scan-drawing
+      - file: 78091_WT1.06_062626 V2_20260626_135429_summary.csv
+        drawing: 78091_WT1.06_062626 V2
+        location: rivet_circle_count, rivet_ellipse_count, weep_circle_count, weep_ellipse_count
+
+  - id: atp.checks-described-but-not-in-v082
+    status: needs_confirmation
+    statement: >
+      The v0.4 install note says the audit also checks open-offset
+      zero-length lines, unexpected entity types on the router, open-offset,
+      rivet, and weep layers, non-zero Z, and a missing-required-layer result
+      written to layer_contract_check.csv. D20_AutoCAD_Audit_Visual_v0_8_2.lsp
+      does not emit those checks. Its CSV writer emits summary and issue_log
+      only. The test checklist still names PANEL_LABEL_SUFFIX_ONLY,
+      BLOCK_INSERT_PRESENT, ROUTER_LAYER_CONTAINS_LINE_CHAINS, and
+      MISSING_REQUIRED_LAYER. The 0.8.2 codes for the first three conditions
+      are SUFFIX_ONLY_LABEL, BLOCK_INSERT_FOUND, and
+      OPEN_ROUTER_LINE_CHAIN_ENDPOINT. MISSING_REQUIRED_LAYER is not emitted.
+    question: >
+      Are zero-length open-offset lines, unexpected entity types, non-zero Z,
+      and a missing required layer still ATP failures, and which issue-code
+      names should stay?
+    sources:
+      - file: README_D20_AutoCAD_Audit_Install.txt
+        drawing: n/a
+        location: Section "WHAT IT CHECKS" for v0.4.0
+      - file: D20_Audit_Test_Checklist.txt
+        drawing: n/a
+        location: Issue-code list in step 7
+      - file: D20_AutoCAD_Audit_Visual_v0_8_2.lsp
+        drawing: n/a
+        location: D20:scan-drawing and D20:write-outputs; those v0.4 checks are absent
+
+  - id: atp.commands
+    status: confirmed
+    statement: >
+      The working D20 commands named in the handoff are D20PRECHECKVIEW,
+      D20CLEARQC, D20ISSUES, D20FIX_ROUTER_SPLITS, D20ATPREADY, D20EXPORT_ATP,
+      and D20EXPORT_ATP_DXF. The 0.8.2 file registers D20PRECHECKVIEW
+      (alias D20PRECHECK), D20CLEARQC, D20FIX_ROUTER_SPLITS, D20ATPREADY,
+      D20EXPORT_ATP, D20EXPORT_ATP_DXF, and D20EXPORT_ATP_PACKAGE. It does not
+      define D20ISSUES. D20PRECHECKVIEW is the audit that writes the CSVs and
+      the in-drawing dashboard.
+    sources:
+      - file: Project Handoff.md
+        drawing: n/a
+        location: 'Section "Current working commands"'
+      - file: D20_AutoCAD_Audit_Visual_v0_8_2.lsp
+        drawing: n/a
+        location: Command defuns and the load banner; no c:D20ISSUES

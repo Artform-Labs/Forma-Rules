@@ -1,0 +1,219 @@
+rules:
+  - id: nomenclature.pattern
+    status: confirmed
+    confirmed_on: 2026-10-09
+    statement: >
+      A panel name is dot-separated tokens in this order: orientation, face
+      count, return type, then any angle group, then any cutout group, then
+      an optional custom token. The nomenclature sheet header is
+      V.1.R.A1.L01.X1.L01.C1, which reads orientation, faces, return,
+      angle count, location of that angle, cutout count, location of that
+      cutout, custom.
+    sources:
+      - file: PANEL NOMENCLATURE SHEET.pdf
+        drawing: PANEL NOMENCLATURE SHEET
+        location: Header row V.1.R.A1.L01.X1.L01.C1 and the labels under each token
+      - file: Austin confirmation 2026-10-09
+        drawing: n/a
+        location: Orientation, face count, R/RT/RB, A# angles, L/W location, X# cutouts, location, C# custom
+
+  - id: nomenclature.orientation
+    status: confirmed
+    confirmed_on: 2026-10-09
+    statement: >
+      Orientation tokens are V (vertical), H (horizontal), VHS
+      (vertical-horizontal soffit), and C (coping).
+    sources:
+      - file: PANEL NOMENCLATURE SHEET.pdf
+        drawing: PANEL NOMENCLATURE SHEET
+        location: Legend "V- VERTICAL", "H- HORIZONTAL", "VHS- VERTICAL HORIZONTAL SOFFIT", "C- COPING"
+      - file: Austin confirmation 2026-10-09
+        drawing: n/a
+        location: Same four orientation meanings
+
+  - id: nomenclature.vhr-token
+    status: needs_confirmation
+    statement: >
+      The same nomenclature sheet prints "(H,VHR,C)" in the orientation
+      options while the legend and Austin's confirmation use VHS, not VHR.
+      VHS is the captured orientation token. VHR is not a second orientation.
+    question: >
+      Is VHR on the nomenclature sheet a typo for VHS, or is VHR a real
+      alias that parsers must accept?
+    sources:
+      - file: PANEL NOMENCLATURE SHEET.pdf
+        drawing: PANEL NOMENCLATURE SHEET
+        location: Parenthetical options "(H,VHR,C)" versus legend "VHS- VERTICAL HORIZONTAL SOFFIT"
+
+  - id: nomenclature.return-type
+    status: confirmed
+    confirmed_on: 2026-10-09
+    statement: >
+      The return token is R (rectangle), RT (return top), or RB (return bottom).
+    sources:
+      - file: PANEL NOMENCLATURE SHEET.pdf
+        drawing: PANEL NOMENCLATURE SHEET
+        location: 'Legend "RECTANGLE / RETURN TOP / RETURN BOTTOM" under the R token, with options "(RT,RB)"'
+      - file: Austin confirmation 2026-10-09
+        drawing: n/a
+        location: R/RT/RB meanings
+
+  - id: nomenclature.modifier-tokens
+    status: confirmed
+    statement: >
+      A# is the number of angles. The following L or W token is the location
+      of the previous angle. X# is the number of cutouts. The following L or
+      W token is the location of the previous cutout. C# is the custom token.
+      The sheet's examples of location tokens are L02, W01, and W02, and its
+      examples of later tokens are A2, A3, A4, X2, X3, C2, and C3.
+    sources:
+      - file: PANEL NOMENCLATURE SHEET.pdf
+        drawing: PANEL NOMENCLATURE SHEET
+        location: Labels "ANGLE - NUMBER OF ANGLES", "LOCATION OF PREVIOUS", "CUT OUT - NUMBER OF CUTS", "CUSTOM PART", and the parenthetical token lists
+
+  - id: nomenclature.token-order-on-filenames
+    status: needs_confirmation
+    statement: >
+      Several sheet titles do not follow the header order. The nomenclature
+      sheet's own second example is V.2.RT.X2.W2.A1.L1.C1, which places the
+      cutout group before the angle group. Shop titles also mix orders, for
+      example V.1.RT.L1.A1.W1 (location before angle) and
+      V.2.RT.X2.W2.A1.L1.X1.L1.C1 (cutout, angle, then another cutout).
+    question: >
+      Is the header order the only legal order, or must a parser accept
+      angle groups and cutout groups in whichever order the sheet title uses?
+    sources:
+      - file: PANEL NOMENCLATURE SHEET.pdf
+        drawing: PANEL NOMENCLATURE SHEET
+        location: Example callout V.2.RT.X2.W2.A1.L1.C1
+      - file: V.1.RT.L1.A1.W1.pdf
+        drawing: V.1.RT.L1.A1.W1
+        location: Title block
+      - file: V.2.RT.X2.W2.A1.L1.X1.L1.C1.pdf
+        drawing: V.2.RT.X2.W2.A1.L1.X1.L1.C1
+        location: Title block
+
+  - id: nomenclature.zero-padding
+    status: needs_confirmation
+    statement: >
+      Location tokens appear both zero-padded and unpadded. The sheet header
+      uses L01. The sheet's own example uses L1 and W2. Shop titles use both
+      forms, including W01 and W1 on different sheets.
+    question: >
+      Are L1 and L01 the same location token, and should new names use the
+      padded form from the header?
+    sources:
+      - file: PANEL NOMENCLATURE SHEET.pdf
+        drawing: PANEL NOMENCLATURE SHEET
+        location: Header L01 versus example V.2.RT.X2.W2.A1.L1.C1
+      - file: V.1.RT.L1.A1.W1.pdf
+        drawing: V.1.RT.L1.A1.W1
+        location: Title uses L1 and W1
+      - file: C.3.R.A1.W01.A1.W03.C1.pdf
+        drawing: C.3.R.A1.W01.A1.W03.C1
+        location: Title uses W01 and W03
+
+  - id: nomenclature.wf-token
+    status: needs_confirmation
+    statement: >
+      WF appears in panel names and is not on the nomenclature sheet.
+      Examples: H.1.R.A3.WF, V.1.RB.L1.A2.W1.WF.W2, V.2.RB.L1.WF.W2.C1L,
+      and VHS.3.C30.WF.
+    question: What does the WF token mean, and where does it sit in the name?
+    sources:
+      - file: H.1.R.A3.WF.pdf
+        drawing: H.1.R.A3.WF
+        location: Title block
+      - file: V.1.RB.L1.A2.W1.WF.W2-3D.pdf
+        drawing: V.1.RB.L1.A2.W1.WF.W2-3D
+        location: Title block
+      - file: V.2.RB.L1.WF.W2.C1L.pdf
+        drawing: V.2.RB.L1.WF.W2.C1L
+        location: Title block
+      - file: VHS.3.C30.WF.pdf
+        drawing: VHS.3.C30.WF
+        location: Title block
+
+  - id: nomenclature.custom-code-spelling
+    status: needs_confirmation
+    statement: >
+      Custom tokens are written more than one way. The sheet shows C1, C2, C3.
+      File names also use C.30, C.31, C.10, C.11, C.21, C.01, C30, and C1
+      with a side suffix (C1L, C1R, C2L).
+    question: >
+      Which custom-token spelling is canonical, and are C.30 and C30 the same
+      token? Are L and R side suffixes part of the custom token?
+    sources:
+      - file: PANEL NOMENCLATURE SHEET.pdf
+        drawing: PANEL NOMENCLATURE SHEET
+        location: Custom examples C1, C2, C3
+      - file: V.2.R.C.30L.pdf
+        drawing: V.2.R.C.30L
+        location: Title block
+      - file: VHS.3.C30.WF.pdf
+        drawing: VHS.3.C30.WF
+        location: Title block
+      - file: V.2.R.C1L.pdf
+        drawing: V.2.R.C1L
+        location: Title block
+
+  - id: nomenclature.coping-prefix
+    status: needs_confirmation
+    statement: >
+      Coping is the C orientation on the nomenclature sheet, but the coping
+      shop drawing in this set is titled
+      V.1.RT.L1.A1.W01.A2.W02.C1 COPING, which uses V rather than C.
+    question: >
+      When is a coping named with orientation C, and when is it a V.1.RT
+      panel with the word COPING added?
+    sources:
+      - file: PANEL NOMENCLATURE SHEET.pdf
+        drawing: PANEL NOMENCLATURE SHEET
+        location: "C- COPING"
+      - file: V.1.RT.L1.A1.W01.A2.W02.C1 COPING.pdf
+        drawing: V.1.RT.L1.A1.W01.A2.W02.C1 COPING
+        location: Title block
+
+  - id: nomenclature.rb-face-and-return-widths
+    status: confirmed
+    confirmed_on: 2026-10-09
+    statement: >
+      On an RB panel, W01 is the face and W02 is the soffit return. This
+      mapping is for RB panels. It is not a claim that W02 is a soffit return
+      on R, RT, or VHS panels.
+    sources:
+      - file: Austin confirmation 2026-10-09
+        drawing: n/a
+        location: RB weeps sit between the face (W01) and the soffit return (W02)
+      - file: V.2.RB.X2.W2.A1.L1.C1.PDF
+        drawing: V.2.RB.X2.W2.A1.L1.C1-3D
+        location: Face and return widths labeled W01 and W02
+      - file: V.1.RB.L1.A1.W1.pdf
+        drawing: V.1.RB.L1.A1.W1
+        location: Widths labeled W01 and W02
+
+  - id: nomenclature.angle-id-styles
+    status: needs_confirmation
+    statement: >
+      Angle identifiers are not written one way. The nomenclature sheet uses
+      A1, A2, A3, A4. Shop drawings also use A01, A02, A03, AA, AAA, D5, D7,
+      D8, RD1, and RD2.
+    question: >
+      Are A1 and A01 the same kind of token, and are AA, AAA, D#, and RD#
+      angle tokens or a different callout?
+    sources:
+      - file: PANEL NOMENCLATURE SHEET.pdf
+        drawing: PANEL NOMENCLATURE SHEET
+        location: Angle tokens A1 through A4
+      - file: C.3.R.pdf
+        drawing: C.3.R
+        location: Angle marks 106° (AA) and 74° (AAA)
+      - file: C.3.R.C.10.pdf
+        drawing: C.3.R.C.10
+        location: Angle marks (D7) and (D1)
+      - file: C.3.R.C.21.pdf
+        drawing: C.3.R.C.21
+        location: Angle marks (RD1) and (RD2)
+      - file: C.3.R.C1.pdf
+        drawing: C.3.R.C1
+        location: Angle mark (A01)

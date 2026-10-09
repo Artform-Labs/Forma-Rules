@@ -1,0 +1,309 @@
+rules:
+  - id: dimensions.units-inches
+    status: confirmed
+    statement: >
+      Shop dimensions in this set are decimal inches. The SOP states spacing
+      in inches and fractions of an inch (16 inch on center, 1/32 inch,
+      31/32 inch).
+    sources:
+      - file: D20 SOP 24-2 AUTOCAD FORMA.dxf
+        drawing: D20 SOP 24-2 AUTOCAD FORMA
+        location: Rivet and weep multileaders and the 1/32 inch route-line note on 0-TEXT
+
+  - id: dimensions.material-acm
+    status: confirmed
+    statement: >
+      These panel shop drawings are ACM. Every title block in the panel-type
+      set lists Material ACM.
+    sources:
+      - file: V.1.R-3D.pdf
+        drawing: V.1.R-3D
+        location: Title block Material ACM
+      - file: PANEL NOMENCLATURE SHEET.pdf
+        drawing: PANEL NOMENCLATURE SHEET
+        location: Sheet is the ACM panel naming standard; individual panel sheets repeat Material ACM
+
+  - id: dimensions.weep-diameter
+    status: confirmed
+    confirmed_on: 2026-10-09
+    statement: >
+      Weep holes are 0.25 inch diameter. Shop drawings call out ".25" next
+      to the word WEEP or WEEPS. The SOP draws weep drill centers as circles
+      of radius 0.125 (diameter 0.25) on ACM_Layer 5_Drill Centers_Weep Holes.
+      Model space of the SOP contains 27 of those circles.
+    sources:
+      - file: Austin confirmation 2026-10-09
+        drawing: n/a
+        location: Diameter 0.25 weeps
+      - file: V.2.RB.X2.W2.A1.L1.C1.PDF
+        drawing: V.2.RB.X2.W2.A1.L1.C1-3D
+        location: Callout ".25" / "WEEPS"
+      - file: V.2.RT.X2.W2.A1.L1.C1.PDF
+        drawing: V.2.RT.X2.W2.A1.L1.C1-3D
+        location: Callout ".25" / "WEEP"
+      - file: V.1.R-3D.pdf
+        drawing: V.1.R-3D
+        location: Callout .25. This sheet's text does not include the word WEEP; the RB and RT sheets do.
+      - file: D20 SOP 24-2 AUTOCAD FORMA.dxf
+        drawing: D20 SOP 24-2 AUTOCAD FORMA
+        location: Model-space CIRCLE radius 0.125 on ACM_Layer 5_Drill Centers_Weep Holes
+
+  - id: dimensions.rivet-diameter
+    status: needs_confirmation
+    statement: >
+      Shop drawings call the rivet out as .13, and Austin confirmed diameter
+      0.13 on 2026-10-09. The SOP model space does not draw 0.13 circles.
+      Its rivet drill-center circles, 174 of them on
+      ACM_Layer 4_Drill Centers_Rivet Holes, have radius 0.0625 (diameter
+      0.125). A block layer in the same file is named Circles_0.125 and uses
+      the same radius. Both numbers are recorded. Neither is chosen here.
+    question: >
+      Is the rivet diameter 0.13, is the drill-center circle a 0.125 symbol
+      or pilot, or is one of these sources out of date?
+    sources:
+      - file: Austin confirmation 2026-10-09
+        drawing: n/a
+        location: Diameter 0.13 rivets
+      - file: V.2.RB.X2.W2.A1.L1.C1.PDF
+        drawing: V.2.RB.X2.W2.A1.L1.C1-3D
+        location: Callout ".13" / "RIVETS"
+      - file: V.2.RT.X2.W2.A1.L1.C1.PDF
+        drawing: V.2.RT.X2.W2.A1.L1.C1-3D
+        location: Callout ".13" / "RIVETS"
+      - file: V.1.R-3D.pdf
+        drawing: V.1.R-3D
+        location: Callout .13
+      - file: D20 SOP 24-2 AUTOCAD FORMA.dxf
+        drawing: D20 SOP 24-2 AUTOCAD FORMA
+        location: Model-space CIRCLE radius 0.0625 on the rivet drill-center layer; layer Circles_0.125
+
+  - id: dimensions.typical-return-31-32
+    status: confirmed
+    confirmed_on: 2026-10-09
+    statement: >
+      A typical 1 inch return is fabricated at 31/32 inch (0.96875), called
+      out as .97 on the shop drawings. The SOP multileader says typical 1 inch
+      returns are 31/32 inch and dimensions that leg as 0.97. The measured SOP
+      dimension value is 0.96875. Drawings that call out .97 at the return
+      include H.1.R.A3.WF, V.2.R.C2L (".97 X3"), V.2.RB.L1.WF.W2.C1L,
+      V.2.RT.L1.A1.W1.C1L, V.1.R-3D, V.2.RB.X2.W2.A1.L1.C1-3D, and
+      V.2.RT.X2.W2.A1.L1.C1-3D.
+    sources:
+      - file: Austin confirmation 2026-10-09
+        drawing: n/a
+        location: .97 flange
+      - file: D20 SOP 24-2 AUTOCAD FORMA.dxf
+        drawing: D20 SOP 24-2 AUTOCAD FORMA
+        location: >
+          Multileader on 0-TEXT saying typical 1 inch returns are 31/32 inch; dimension
+          text 0.97; DIMENSION group 42 value 0.96875
+      - file: H.1.R.A3.WF.pdf
+        drawing: H.1.R.A3.WF
+        location: Callout .97 at the return
+      - file: V.2.R.C2L.pdf
+        drawing: V.2.R.C2L
+        location: Callout ".97 X3"
+      - file: V.2.RB.X2.W2.A1.L1.C1.PDF
+        drawing: V.2.RB.X2.W2.A1.L1.C1-3D
+        location: Repeated .97 return callouts
+      - file: V.2.RT.X2.W2.A1.L1.C1.PDF
+        drawing: V.2.RT.X2.W2.A1.L1.C1-3D
+        location: Repeated .97 return callouts
+
+  - id: dimensions.other-return-depth-0.75
+    status: needs_confirmation
+    statement: >
+      Some sheets also call out .75 at a leg, including V.1.R-3D, V.2.R.C2L
+      (".75 X3"), V.2.RB.L1.WF.W2.C1L, and V.2.RT.L1.A1.W1.C1L. The SOP
+      typical-return note covers the 1 inch / 31/32 inch leg only. .75 is
+      not recorded as a second standard flange.
+    question: >
+      What is the .75 leg (a 3/4 inch return, a different flange, or a
+      project dimension), and when is it used instead of .97?
+    sources:
+      - file: V.1.R-3D.pdf
+        drawing: V.1.R-3D
+        location: Callout .75
+      - file: V.2.R.C2L.pdf
+        drawing: V.2.R.C2L
+        location: Callout ".75 X3" beside ".97 X3"
+      - file: V.2.RB.L1.WF.W2.C1L.pdf
+        drawing: V.2.RB.L1.WF.W2.C1L
+        location: Callouts .75 and .97
+      - file: V.2.RT.L1.A1.W1.C1L.pdf
+        drawing: V.2.RT.L1.A1.W1.C1L
+        location: Callouts .75 and .97
+
+  - id: dimensions.corner-relief-1.38
+    status: needs_confirmation
+    statement: >
+      Austin identified 1.38 as the corner relief on 2026-10-09. That
+      dimension is drawn on V.2.R.C.30L, V.2.R.C.30R,
+      V.2.RB.X2.W2.A1.L1.C1-3D, and V.2.RT.X2.W2.A1.L1.C1-3D. The SOP
+      dimension set does not contain 1.38. Other sheets put a different
+      number at a comparable corner: 1.50 on V.2.R.C1L and V.2.R.C1R, and
+      1.13 with 1.03 on VHS.3.C30.WF and VHS.6.R.CORNER. 1.38 is captured
+      as the value Austin named, not as a value verified on every panel type.
+    question: >
+      Is 1.38 the standard corner relief for every panel, and are 1.50,
+      1.13, and 1.03 panel-specific dimensions rather than reliefs?
+    sources:
+      - file: Austin confirmation 2026-10-09
+        drawing: n/a
+        location: 1.38 corner relief
+      - file: V.2.R.C.30L.pdf
+        drawing: V.2.R.C.30L
+        location: Callout 1.38 at the flat-pattern corner
+      - file: V.2.R.C.30R.pdf
+        drawing: V.2.R.C.30R
+        location: Callout 1.38 at the flat-pattern corner
+      - file: V.2.RB.X2.W2.A1.L1.C1.PDF
+        drawing: V.2.RB.X2.W2.A1.L1.C1-3D
+        location: Callout 1.38 at both ends of the pattern
+      - file: V.2.RT.X2.W2.A1.L1.C1.PDF
+        drawing: V.2.RT.X2.W2.A1.L1.C1-3D
+        location: Repeated 1.38 callouts, including beside the weep callout
+      - file: V.2.R.C1L.pdf
+        drawing: V.2.R.C1L
+        location: Callout 1.50
+      - file: V.2.R.C1R.pdf
+        drawing: V.2.R.C1R
+        location: Callout 1.50
+      - file: VHS.3.C30.WF.pdf
+        drawing: VHS.3.C30.WF
+        location: Callouts 1.13 and 1.03
+      - file: VHS.6.R.CORNER.pdf
+        drawing: VHS.6.R.CORNER
+        location: Callouts 1.13 and 1.03
+
+  - id: dimensions.route-offset-one-thirty-second
+    status: confirmed
+    statement: >
+      Route-line to route-line distance is the actual panel-face dimension
+      minus 1/32 inch for each route line. Two route lines shorten the
+      actual panel dimension by 1/16 inch. The SOP example is an actual
+      panel dimension of 20.00 and a route-line distance of 19.9375, written
+      on the sheet as 19.94. The note spells the verb "SUBSTRACT".
+    sources:
+      - file: D20 SOP 24-2 AUTOCAD FORMA.dxf
+        drawing: D20 SOP 24-2 AUTOCAD FORMA
+        location: >
+          Multileader on 0-TEXT: from actual PD, subtract 1/32 inch for each
+          route line; example lessened by 1/16 inch. Dimension text
+          "20.00 ACTUAL PD" and "19.94 ROUTE LINE TO ROUTE LINE".
+
+  - id: dimensions.route-line-meets-cut-boundary
+    status: confirmed
+    statement: >
+      The route-line layer extends to the boundary of the cut-line layer.
+    sources:
+      - file: D20 SOP 24-2 AUTOCAD FORMA.dxf
+        drawing: D20 SOP 24-2 AUTOCAD FORMA
+        location: Multileader on 0-TEXT "ROUTE LINE LAYER EXTENDS TO BOUNDARY OF CUT LINE LAYER"
+
+  - id: dimensions.rivet-spacing-schedule
+    status: needs_confirmation
+    statement: >
+      The SOP gives three rivet schedules, copied here as written. Single
+      rivets at 16 inches on center are good for panels under 24 inches wide,
+      under 120 inches long, and under 20 square feet. Double rivets at 16
+      inches on center are good for panels under 48 inches wide, under 120
+      inches long, and between 20 and 40 square feet. Double rivets at 12
+      inches on center are good for panels over 48 inches wide, over 120
+      inches long, and over 40 square feet. The remainder to the end of the
+      flange must be under 16 inches from the last rivet. Those three bands
+      do not name panels that mix the width and length limits, or panels
+      that land on 24, 48, 120, 20 square feet, or 40 square feet.
+    question: >
+      Which schedule applies on a boundary (exactly 24 inches, 48 inches,
+      120 inches, 20 square feet, or 40 square feet) and when width and
+      length fall in different bands?
+    sources:
+      - file: D20 SOP 24-2 AUTOCAD FORMA.dxf
+        drawing: D20 SOP 24-2 AUTOCAD FORMA
+        location: >
+          Multileaders on 0-TEXT for single rivets at 16 inches, double
+          rivets at 16 inches, double rivets at 12 inches, and "REMAINDER
+          MUST BE <16 inches FROM LAST RIVET"
+
+  - id: dimensions.rivet-sixteen-oc-min-callout
+    status: needs_confirmation
+    statement: >
+      V.1.R-3D calls out "16 inch OC MIN" on the same sheet as .13, .25, .97,
+      and .75. The SOP uses 16 inches on center for rivets on the smaller
+      schedules and 24 inches on center maximum for weeps. The drawing text
+      does not say which feature the 16 inch callout belongs to.
+    question: >
+      Is "16 inch OC MIN" on V.1.R-3D the rivet spacing, and does MIN mean the
+      maximum gap is 16 inches?
+    sources:
+      - file: V.1.R-3D.pdf
+        drawing: V.1.R-3D
+        location: Callout 16" OC MIN
+      - file: D20 SOP 24-2 AUTOCAD FORMA.dxf
+        drawing: D20 SOP 24-2 AUTOCAD FORMA
+        location: Rivet 16 inch schedules and weep 24 inch maximum note
+
+  - id: dimensions.rivet-pilots-layout
+    status: confirmed
+    statement: >
+      Rivet pilots start at the center of the flange and move outward. Rivet
+      pilots align across flanges. One SOP leader says "STANDARD RIVER PILOT
+      OFFSET FROM INSIDE CORNER" and does not give the offset distance.
+      That missing distance is dimensions.rivet-inside-corner-offset.
+    sources:
+      - file: D20 SOP 24-2 AUTOCAD FORMA.dxf
+        drawing: D20 SOP 24-2 AUTOCAD FORMA
+        location: >
+          Multileaders on 0-TEXT: "START RIVET PILOTS AT CENTER OF FLANGE
+          AND MOVE OUT", "RIVET PILOTS ALIGN ACROSS FLANGES", and
+          "STANDARD RIVER PILOT OFFSET FROM INSIDE CORNER"
+
+  - id: dimensions.rivet-inside-corner-offset
+    status: needs_confirmation
+    statement: >
+      The SOP requires a rivet-pilot offset from the inside corner and does
+      not state the distance. V.1.R-3D shows an unlabeled .48 on the same
+      flat pattern as the .13 rivet callout. .48 is not recorded as the
+      offset.
+    question: >
+      What is the standard rivet-pilot offset from the inside corner, and is
+      the .48 callout on V.1.R-3D that offset?
+    sources:
+      - file: D20 SOP 24-2 AUTOCAD FORMA.dxf
+        drawing: D20 SOP 24-2 AUTOCAD FORMA
+        location: Multileader "STANDARD RIVER PILOT OFFSET FROM INSIDE CORNER" with no distance
+      - file: V.1.R-3D.pdf
+        drawing: V.1.R-3D
+        location: Unlabeled callout .48
+
+  - id: dimensions.double-rivet-pair-spacing
+    status: needs_confirmation
+    statement: >
+      The SOP says when to use double rivets and does not state the distance
+      between the two pilots in a pair. In the SOP model space, many rivet
+      circles on the same flange sit 1.00 inch apart, with the next gap at
+      the schedule spacing. 1.00 inch is an observed spacing in that file,
+      not a written standard.
+    question: Is 1.00 inch the standard spacing between the two pilots of a double rivet?
+    sources:
+      - file: D20 SOP 24-2 AUTOCAD FORMA.dxf
+        drawing: D20 SOP 24-2 AUTOCAD FORMA
+        location: >
+          Model-space rivet circles on ACM_Layer 4_Drill Centers_Rivet Holes;
+          repeated 1.00 inch gaps beside 11 inch, 15 inch, and 16 inch gaps
+
+  - id: dimensions.v1r3d-one-inch-callout
+    status: needs_confirmation
+    statement: >
+      V.1.R-3D also calls out 1.00, twice, beside .97 and .75. The SOP says
+      a typical 1 inch return is made at 31/32 inch. The 1.00 callout is not
+      given a label in the extracted text.
+    question: Is the 1.00 callout on V.1.R-3D the nominal return before the 31/32 inch fabrication size?
+    sources:
+      - file: V.1.R-3D.pdf
+        drawing: V.1.R-3D
+        location: Callouts 1.00, .97, and .75
+      - file: D20 SOP 24-2 AUTOCAD FORMA.dxf
+        drawing: D20 SOP 24-2 AUTOCAD FORMA
+        location: "TYPICAL 1\" RETURNS ARE 31/32\""
