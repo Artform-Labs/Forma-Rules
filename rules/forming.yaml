@@ -1,0 +1,102 @@
+rules:
+  - id: forming.bend-angle-is-the-callout
+    status: confirmed
+    statement: >
+      The bend angle is the angle written on that sheet. The usual callout is
+      "BEND UP 90°". A sheet that states another angle uses that angle. Examples
+      that are not 90 degrees include 95, 85, and 5 on C.3.R.C1; 106 (AA) and
+      74 (AAA) on C.3.R; 88.63 and 91.37 on C.6.R.A1.L01.C1; and 89 and 91 on
+      the coping sheet. V.1.RB.L1.A2.W1.WF.W2-3D also uses "BEND UP 90°+A01"
+      and "BEND UP 90°-A01".
+    sources:
+      - file: V.2.R.pdf
+        drawing: V.2.R
+        location: Repeated "BEND UP 90°"
+      - file: C.3.R.C1.pdf
+        drawing: C.3.R.C1
+        location: 'Callouts "BEND UP 95°", "BEND UP 85°", and 5° (A01)'
+      - file: C.3.R.pdf
+        drawing: C.3.R
+        location: 106° (AA) and 74° (AAA)
+      - file: C.6.R.A1.L01.C1.pdf
+        drawing: C.6.R.A1.L01.C1
+        location: 'Callouts "BEND UP 85°", "BEND UP 88.63°", "BEND UP 91.37°", and "BEND UP 95°"'
+      - file: V.1.RT.L1.A1.W01.A2.W02.C1 COPING.pdf
+        drawing: V.1.RT.L1.A1.W01.A2.W02.C1 COPING
+        location: 'Callouts "BEND UP 89°" and "BEND UP 91°"'
+      - file: V.1.RB.L1.A2.W1.WF.W2-3D.pdf
+        drawing: V.1.RB.L1.A2.W1.WF.W2-3D
+        location: 'Callouts "BEND UP 90°+A01" and "BEND UP 90°-A01"'
+
+  - id: forming.bare-bend-up
+    status: needs_confirmation
+    statement: >
+      C.3.R includes the callout "BEND UP" with no degree value next to the
+      106° and 74° marks. No rule in the SOP says what a bare "BEND UP" means.
+    question: Does a bare "BEND UP" mean 90 degrees, or is the angle the nearby AA or AAA value?
+    sources:
+      - file: C.3.R.pdf
+        drawing: C.3.R
+        location: Callouts "BEND UP" without a degree, beside 106° (AA) and 74° (AAA)
+
+  - id: forming.bend-till-miter-meets
+    status: needs_confirmation
+    statement: >
+      V.2.RB.L1.A2.W1.C1-3D says "BEND TILL MITER MEET" at the mitered return.
+      That sentence is recorded for this condition. It is not applied to every
+      miter from this one sheet.
+    question: Is "bend until the miter meets" the rule for every mitered return, or only this panel?
+    sources:
+      - file: V.2.RB.L1.A2.W1.C1-3D.pdf
+        drawing: V.2.RB.L1.A2.W1.C1-3D
+        location: Callout "BEND TILL MITER MEET"
+
+  - id: forming.coping-f-clip
+    status: needs_confirmation
+    statement: >
+      The coping sheet says both "NO CLIP" and "ALL FLANGES GET F CLIP".
+      The two notes are on the same drawing. No other sheet in this set uses
+      the F-clip note. Which flanges get a clip is not settled from the text
+      alone.
+    question: Which flanges on V.1.RT.L1.A1.W01.A2.W02.C1 COPING get an F clip, and which get no clip?
+    sources:
+      - file: V.1.RT.L1.A1.W01.A2.W02.C1 COPING.pdf
+        drawing: V.1.RT.L1.A1.W01.A2.W02.C1 COPING
+        location: Notes "NO CLIP" and "ALL FLANGES GET F CLIP"
+
+  - id: forming.vhs-angle-rs01-ac3
+    status: needs_confirmation
+    statement: >
+      VHS.3.C30.WF and VHS.6.R.CORNER call out RS01-AC3, a 1 inch by 3/4 inch
+      by 1/8 inch angle, and say to see detail 12 AF5.0. Detail 12 is not in
+      this set. The note is recorded
+      for those two OU FSED sheets, not as a rule for every VHS panel.
+    question: >
+      Is the RS01-AC3 1 x 3/4 x 1/8 inch angle required on every VHS panel,
+      and what does detail 12 AF5.0 require?
+    sources:
+      - file: VHS.3.C30.WF.pdf
+        drawing: VHS.3.C30.WF
+        location: Note RS01-AC3, 1 inch by 3/4 inch by 1/8 inch angle, see detail 12 AF5.0
+      - file: VHS.6.R.CORNER.pdf
+        drawing: VHS.6.R.CORNER
+        location: The same RS01-AC3 note, twice
+
+  - id: forming.sheets-with-no-extractable-geometry
+    status: needs_confirmation
+    statement: >
+      Two files in the panel-type set did not yield shop geometry. V.1.R.pdf
+      extracted only the SolidWorks educational watermark. V.1.RB.L1.pdf
+      extracted no text. Rules above were not taken from those two files.
+      V.1.R-3D.pdf and V.1.RB.L1.A1.W1.pdf were readable and are cited where
+      they apply.
+    question: >
+      Do V.1.R.pdf and V.1.RB.L1.pdf contain callouts that are not on the
+      readable sheets?
+    sources:
+      - file: V.1.R.pdf
+        drawing: V.1.R
+        location: Extracted text is only "SOLIDWORKS Educational Product. For Instructional Use Only."
+      - file: V.1.RB.L1.pdf
+        drawing: V.1.RB.L1
+        location: No extractable text

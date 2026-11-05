@@ -1,0 +1,145 @@
+rules:
+  - id: drainage.weep-line-is-low-edge
+    status: confirmed
+    confirmed_on: 2026-10-09
+    statement: >
+      The weep line is the low edge of the drainage path.
+    sources:
+      - file: Austin confirmation 2026-10-09
+        drawing: n/a
+        location: Confirmed weep-path rule
+
+  - id: drainage.panel-bottom-follows-weeps
+    status: confirmed
+    confirmed_on: 2026-10-09
+    statement: >
+      A panel's bottom is the edge where its weeps are.
+    sources:
+      - file: Austin confirmation 2026-10-09
+        drawing: n/a
+        location: Confirmed orientation rule
+
+  - id: drainage.r-weeps-on-bottom-flange
+    status: confirmed
+    confirmed_on: 2026-10-09
+    statement: >
+      Rectangle (R) panels take weeps on the bottom flange. Spacing is 24
+      inches maximum on center. V.1.R states the same limit: weeps are on
+      the bottom flange only, not the top flange, at no more than 24 inches
+      on center. Where the first weep is measured from is
+      drainage.first-weep-four-inches: 1 inch from the last rivet hole of
+      the double set of rivets.
+    sources:
+      - file: Austin confirmation 2026-10-09
+        drawing: n/a
+        location: R panels, bottom flange, 24 inch maximum on center
+      - file: Austin Durbin email 2026-11-05 (abd@art-form.com) via Sydney
+        drawing: n/a
+        location: >
+          Weeps are 1 in from the last rivet hole of the double set of rivets.
+      - file: PANEL-FABRICATION-STANDARDS.md
+        drawing: V.1.R
+        location: >
+          Weep Standards. Weeps only on the bottom flange, not the top flange.
+          Spaced at no more than 24 inches on center.
+      - file: D20 SOP 24-2 AUTOCAD FORMA.dxf
+        drawing: D20 SOP 24-2 AUTOCAD FORMA
+        location: >
+          Multileader on 0-TEXT: weeps at 24 inches on center maximum. The
+          4 inch start in that same note is superseded by
+          drainage.first-weep-four-inches.
+
+  - id: drainage.rb-weeps-at-interior-fold
+    status: confirmed
+    confirmed_on: 2026-10-09
+    statement: >
+      Return-bottom (RB) panels take weeps at the interior fold between the
+      face (W01) and the soffit return (W02). They do not go on the outer
+      flange of the return. Water runs down the face and collects at that
+      fold. The shop drawing labels .25 WEEPS and shows W01 and W02, and it
+      does not carry a written note of this location. Foldr V1.4 was not
+      used; Austin identified that checklist as outdated on RB weeps.
+    sources:
+      - file: Austin confirmation 2026-10-09
+        drawing: n/a
+        location: RB weep location at the W01/W02 interior fold
+      - file: V.2.RB.X2.W2.A1.L1.C1.PDF
+        drawing: V.2.RB.X2.W2.A1.L1.C1-3D
+        location: Callouts ".25" / "WEEPS" with widths W01 and W02
+
+  - id: drainage.v3r-weeps-each-face
+    status: confirmed
+    confirmed_on: 2026-10-09
+    statement: >
+      A V.3.R panel takes weeps on every face's weep-eligible edge. The
+      V.3.R 3D shop drawing shows three faces (L01, L02, L03) with bend-up
+      90 degree callouts and does not label weeps.
+    sources:
+      - file: Austin confirmation 2026-10-09
+        drawing: n/a
+        location: V.3.R weep rule
+      - file: V.3.R 3D.pdf
+        drawing: V.3.R 3D
+        location: Three faces labeled L01, L02, L03 and width W01; no weep note in the text
+
+  - id: drainage.v3r-weep-eligible-meaning
+    status: needs_confirmation
+    statement: >
+      "Weep-eligible edge" is Austin's term. The low-edge rule says the weep
+      line is the low edge of the drainage path. Whether each V.3.R face
+      therefore gets one weep line on its own low edge is the reading used
+      until Austin says otherwise. No other eligibility test is stated.
+    question: >
+      Does weep-eligible mean the low edge of that face's drainage path, so
+      a three-face V.3.R has one weep line on each face?
+    sources:
+      - file: Austin confirmation 2026-10-09
+        drawing: n/a
+        location: 'Austin''s phrase "weeps on every face''s weep-eligible edge", together with the low-edge rule'
+
+  - id: drainage.horizontal-panels-have-no-weeps
+    status: confirmed
+    confirmed_on: 2026-10-09
+    statement: >
+      Horizontal panels do not get weeps. H.1.R.A3.WF has no weep callout
+      in its extracted text. That absence is consistent with this rule and
+      is not an independent proof of it.
+    sources:
+      - file: Austin confirmation 2026-10-09
+        drawing: n/a
+        location: Horizontal panels have no weeps
+      - file: H.1.R.A3.WF.pdf
+        drawing: H.1.R.A3.WF
+        location: Flat pattern text has bend and .97 callouts and no weep note
+
+  - id: drainage.first-weep-four-inches
+    status: confirmed
+    confirmed_on: 2026-11-05
+    statement: >
+      Weeps are 1 inch from the last rivet hole of the double set of rivets.
+      The first weep is 1 inch after the starting double-rivet pair and the
+      last weep is 1 inch before the ending double-rivet pair. Those offsets
+      are measured from the rivet layout, not from the panel corner, and the
+      first and last weeps stay anchored to the end pairs. The SOP note that
+      said the first weep is 4 inches typical from the edge does not apply.
+      The 24 inch on-center maximum still applies. See v1r.weep-spacing.
+      Per dimensions.rivet-weep-schedule-all-panels, this schedule rule is
+      not limited to V.1.R.
+    sources:
+      - file: Austin Durbin email 2026-11-05 (abd@art-form.com) via Sydney
+        drawing: n/a
+        location: >
+          Weeps are 1 in from the last rivet hole of the double set of rivets.
+      - file: PANEL-FABRICATION-STANDARDS.md
+        drawing: V.1.R
+        location: >
+          Weep Standards. First weep 1 inch after the starting double-rivet
+          pair. Last weep 1 inch before the ending pair. Offsets measured
+          from the rivet layout, not from the panel corner. First and last
+          weeps remain anchored to the end pairs.
+      - file: D20 SOP 24-2 AUTOCAD FORMA.dxf
+        drawing: D20 SOP 24-2 AUTOCAD FORMA
+        location: >
+          Multileader on 0-TEXT, repeated: "FIRST WEEP FROM EDGE @ 4" TYP.
+          ALL OTHER WEEPS SPACED EQUALLY B/W RIVETS @ 24" OC MAX". Superseded
+          by Austin Durbin 2026-11-05 for the first-weep offset.

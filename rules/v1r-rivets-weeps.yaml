@@ -1,0 +1,250 @@
+rules:
+  - id: v1r.scope
+    status: confirmed
+    statement: >
+      The records in this file were first captured from the V.1.R fabrication
+      standard. On a V.1.R panel the short side is the width and the long
+      side is the length, taken from the fabrication extents. The note for
+      width under 48 inches and length under 120 inches is the small-panel
+      rivet layout. It does not turn rivets off. A family that resolves to
+      V.1.R but still carries multi-face dimensions is not drawn as V.1.R.
+      Austin Durbin confirmed on 2026-11-05 that rivet and weep schedule
+      rules apply to all panel types; see
+      dimensions.rivet-weep-schedule-all-panels. Corner-geometry wording
+      that is V.1.R-specific remains tied to V.1.R unless another rule says
+      otherwise.
+    sources:
+      - file: PANEL-FABRICATION-STANDARDS.md
+        drawing: V.1.R
+        location: >
+          V.1.R Applicability. Standards apply only to V.1.R flat ACM panels.
+          Short side is width, long side is length. The under-48-inch width
+          and under-120-inch length note is the small-panel rivet condition,
+          not a global rivet switch.
+      - file: Austin Durbin email 2026-11-05 (abd@art-form.com) via Sydney
+        drawing: n/a
+        location: "Yes — the rules apply to all panel types."
+
+  - id: v1r.rivet-drill-center
+    status: confirmed
+    confirmed_on: 2026-11-05
+    statement: >
+      Rivet drill centers are circles of radius 0.0625 inches (diameter 0.125
+      inches) on ACM_Layer 4_Drill Centers_Rivet Holes. The shop callout Ø.13
+      is the rounding of that diameter. Austin Durbin confirmed on 2026-11-05
+      that all rivets are 0.125 inch diameter; see dimensions.rivet-diameter.
+    sources:
+      - file: Austin Durbin email 2026-11-05 (abd@art-form.com) via Sydney
+        drawing: n/a
+        location: "Yes — all rivets are 0.125 in diameter."
+      - file: PANEL-FABRICATION-STANDARDS.md
+        drawing: V.1.R
+        location: Rivet / Fastener Standards, "Rivet drill-center radius is 0.0625 inches."
+      - file: D20 SOP 24-2 AUTOCAD FORMA.dxf
+        drawing: D20 SOP 24-2 AUTOCAD FORMA
+        location: Model-space CIRCLE radius 0.0625 on ACM_Layer 4_Drill Centers_Rivet Holes
+
+  - id: v1r.rivets-on-flange-centerlines
+    status: confirmed
+    statement: >
+      V.1.R rivets are required on all four flanges. They sit on the flange
+      centerlines, not on the face interior. Flanges are 90-degree returns.
+    sources:
+      - file: PANEL-FABRICATION-STANDARDS.md
+        drawing: V.1.R
+        location: >
+          V.1.R Base Geometry, flanges are 90-degree returns and rivets are
+          on flange centerlines. Rivet / Fastener Standards, rivets are
+          required on all four flanges.
+
+  - id: v1r.double-pair-at-flange-ends
+    status: confirmed
+    statement: >
+      On each V.1.R flange, each end gets a double-rivet pair. A pair is two
+      holes, 1 inch apart (dimensions.double-rivet-pair-spacing). The first
+      pair starts after the square corner / route-relief offset. The ending
+      pair is placed before the square corner / route-relief offset at the
+      other end of the flange.
+    sources:
+      - file: PANEL-FABRICATION-STANDARDS.md
+        drawing: V.1.R
+        location: >
+          Rivet / Fastener Standards. Each end of each flange receives a
+          double-rivet pair. The first pair starts after the square corner
+          relief. The ending pair is placed before the relief at the opposite
+          end.
+
+  - id: v1r.rivet-start-offset
+    status: confirmed
+    confirmed_on: 2026-11-05
+    statement: >
+      Standard rivet start is 0.75 inches from the edge (after the square
+      corner / route-relief offset on a square-relief panel). When a panel
+      has a mitered edge (typically multi-face), rivet start is 1.25 inches
+      from the edge. The .75 callout on V.1.R-3D is that standard rivet
+      start. Both values are recorded in dimensions.other-return-depth-0.75.
+      An earlier Foldr/SOP reading swapped corner-relief 1.25 and true-miter
+      0.75; the shop answer wins for this repo.
+    sources:
+      - file: Austin Durbin email 2026-11-05 (abd@art-form.com) via Sydney
+        drawing: n/a
+        location: >
+          0.75 in from the edge is the standard; changes to 1.25 in when a
+          panel has a mitered edge (typically multi-face).
+      - file: PANEL-FABRICATION-STANDARDS.md
+        drawing: V.1.R
+        location: >
+          Rivet / Fastener Standards, "Rivet start offset is 0.75 inches
+          after the square corner / route-relief offset." V.1.R Corner
+          Standards, rivet offsets are measured after the square route-corner
+          relief.
+      - file: V.1.R-3D.pdf
+        drawing: V.1.R-3D
+        location: Callout .75, unlabeled in the extracted text
+
+  - id: v1r.rivet-schedule
+    status: confirmed
+    confirmed_on: 2026-11-05
+    statement: >
+      Rivet layout splits on panel size and applies to all panel types
+      (dimensions.rivet-weep-schedule-all-panels). A panel under 48 inches
+      wide and under 120 inches long gets a double-rivet pair at each end of
+      each flange and individual single rivets between those pairs. The
+      singles are 16 inches on center when that spacing fits. A larger panel
+      gets a double-rivet pair at every station, including the intermediate
+      16-inch stations. A flange that is long enough to show the small-panel
+      pattern runs start pair, 16 inches, single, 16 inches, more singles as
+      needed, end pair. Rivets are still required on a small panel. The size
+      note does not turn them off. Panels that meet only one of the two
+      limits, or that land on exactly 48 or 120 inches, are not given a third
+      band in the source. They are not assigned here
+      (v1r.rivet-schedule-boundaries).
+    sources:
+      - file: Austin Durbin email 2026-11-05 (abd@art-form.com) via Sydney
+        drawing: n/a
+        location: "Yes — the rules apply to all panel types."
+      - file: PANEL-FABRICATION-STANDARDS.md
+        drawing: V.1.R
+        location: >
+          V.1.R Applicability, the under-48-inch width and under-120-inch
+          length note is the small-panel rivet condition. Rivet / Fastener
+          Standards, intermediate singles between end pairs on small panels;
+          every station a double pair on larger panels, including intermediate
+          16-inch stations. The long-flange pattern is start pair, 16 inches,
+          single, 16 inches, more singles, end pair.
+
+  - id: v1r.rivet-schedule-boundaries
+    status: needs_confirmation
+    statement: >
+      v1r.rivet-schedule states the two bands written down: both width under
+      48 inches and length under 120 inches, versus larger. Those schedule
+      rules apply to all panel types
+      (dimensions.rivet-weep-schedule-all-panels). A panel on exactly 48 or
+      120 inches, or a panel under only one of those limits, is not named.
+      Austin's 2026-11-05 email confirmed all-panel applicability and did
+      not give the exact 48 / 120 or one-limit-over edge cases.
+    question: >
+      Does a panel that is exactly 48 inches wide, exactly 120 inches long,
+      or under only one of those two limits use end doubles with intermediate
+      singles, or a double pair at every station?
+    sources:
+      - file: Austin Durbin email 2026-11-05 (abd@art-form.com) via Sydney
+        drawing: n/a
+        location: >
+          Confirmed that the rules apply to all panel types; no answer on
+          exact 48 / 120 or one-limit-over boundaries.
+      - file: PANEL-FABRICATION-STANDARDS.md
+        drawing: V.1.R
+        location: >
+          The small-panel condition is the under-48-inch width and
+          under-120-inch length note. Larger panels are the other sentence.
+          Exact boundaries and mixed extents are not written out.
+
+  - id: v1r.rivet-intermediate-equalize
+    status: confirmed
+    confirmed_on: 2026-11-05
+    statement: >
+      When 16-inch rivet spacing does not fit the flange, the intermediate
+      spacing is equalized and the end double pairs stay fixed. An equalized
+      rivet gap must not exceed 16 inches. That is what MIN means on the
+      V.1.R-3D "16 inch OC MIN" callout
+      (dimensions.rivet-sixteen-oc-min-callout).
+    sources:
+      - file: Austin Durbin email 2026-11-05 (abd@art-form.com) via Sydney
+        drawing: n/a
+        location: >
+          Yes — "16\" OC MIN" requires the equalized rivet gap to stay at or
+          under 16 inches.
+      - file: PANEL-FABRICATION-STANDARDS.md
+        drawing: V.1.R
+        location: >
+          Rivet / Fastener Standards. If exact 16-inch spacing does not fit,
+          equalize the intermediate spacing and keep the end double pairs fixed.
+
+  - id: v1r.square-corner-relief
+    status: confirmed
+    statement: >
+      Every V.1.R face corner is a square 90-degree route relief. The route
+      lines form that square at all four corners. The relief is not a
+      diagonal miter and it is not one-sided. The outer cut stops at the
+      route line and does not run through the square. Flange edges meet at
+      90 degrees. Rivet offsets are measured after this relief. Weep offsets
+      are measured from the rivet layout, not from the corner. The chain is
+      square route-corner relief, then the rivet-pair offset, then the weep
+      offset from the rivet pair. The relief size is not stated in this
+      document. 1.38 remains dimensions.corner-relief-1.38.
+    sources:
+      - file: PANEL-FABRICATION-STANDARDS.md
+        drawing: V.1.R
+        location: >
+          V.1.R Corner Standards. Square 90-degree relief at all four face
+          corners. Not a diagonal miter. Not one-sided. Dependency chain is
+          relief, then rivet-pair offset, then weep offset from the rivet pair.
+
+  - id: v1r.weep-spacing
+    status: confirmed
+    confirmed_on: 2026-11-05
+    statement: >
+      Weeps are only on the bottom flange. They are not on the top flange.
+      The weep drill-center radius is 0.125 inches (diameter 0.25 inches) on
+      ACM_Layer 5_Drill Centers_Weep Holes. Spacing is no more than 24 inches
+      on center. If 24 inches does not fit, the intervals are equalized and
+      still must not exceed 24 inches. First and last weeps are anchored 1
+      inch from the last rivet hole of the end double-rivet pairs
+      (drainage.first-weep-four-inches).
+    sources:
+      - file: Austin Durbin email 2026-11-05 (abd@art-form.com) via Sydney
+        drawing: n/a
+        location: >
+          Weeps are 1 in from the last rivet hole of the double set of rivets.
+      - file: PANEL-FABRICATION-STANDARDS.md
+        drawing: V.1.R
+        location: >
+          Weep Standards. Bottom flange only, not the top flange. Drill-center
+          radius 0.125 inches. No more than 24 inches on center. Equalized
+          intervals must not exceed 24 inches on center.
+      - file: D20 SOP 24-2 AUTOCAD FORMA.dxf
+        drawing: D20 SOP 24-2 AUTOCAD FORMA
+        location: Model-space weep circles of radius 0.125; multileader 24 inch maximum on center
+
+  - id: v1r.drill-centers-do-not-collide
+    status: confirmed
+    statement: >
+      Rivet drill centers must not duplicate each other and weep drill
+      centers must not duplicate each other. A weep must not use the same
+      center as a rivet. If an equalized weep lands on a rivet, add weep
+      intervals until the clash is gone. The first and last weep anchors stay
+      in place while those intervals are added. Those anchors are 1 inch from
+      the last rivet hole of the end double-rivet pairs
+      (drainage.first-weep-four-inches).
+    sources:
+      - file: PANEL-FABRICATION-STANDARDS.md
+        drawing: V.1.R
+        location: >
+          Drill Center Collision Rules. No duplicate rivets, no duplicate
+          weeps, no shared rivet and weep center. Add weep intervals to clear
+          a clash and keep the first and last weep anchors.
+      - file: Austin Durbin email 2026-11-05 (abd@art-form.com) via Sydney
+        drawing: n/a
+        location: >
+          Weeps are 1 in from the last rivet hole of the double set of rivets.
