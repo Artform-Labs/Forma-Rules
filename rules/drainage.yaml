@@ -27,11 +27,16 @@ rules:
       inches maximum on center. V.1.R states the same limit: weeps are on
       the bottom flange only, not the top flange, at no more than 24 inches
       on center. Where the first weep is measured from is
-      drainage.first-weep-four-inches. That position is not settled for V.1.R.
+      drainage.first-weep-four-inches: 1 inch from the last rivet hole of
+      the double set of rivets.
     sources:
       - file: Austin confirmation 2026-10-09
         drawing: n/a
         location: R panels, bottom flange, 24 inch maximum on center
+      - file: Austin Durbin email 2026-11-05 (abd@art-form.com) via Sydney
+        drawing: n/a
+        location: >
+          Weeps are 1 in from the last rivet hole of the double set of rivets.
       - file: PANEL-FABRICATION-STANDARDS.md
         drawing: V.1.R
         location: >
@@ -41,7 +46,7 @@ rules:
         drawing: D20 SOP 24-2 AUTOCAD FORMA
         location: >
           Multileader on 0-TEXT: weeps at 24 inches on center maximum. The
-          4 inch start in that same note is the open conflict in
+          4 inch start in that same note is superseded by
           drainage.first-weep-four-inches.
 
   - id: drainage.rb-weeps-at-interior-fold
@@ -108,23 +113,23 @@ rules:
         location: Flat pattern text has bend and .97 callouts and no weep note
 
   - id: drainage.first-weep-four-inches
-    status: needs_confirmation
+    status: confirmed
+    confirmed_on: 2026-11-05
     statement: >
-      The first weep position is not settled for V.1.R, so neither distance
-      is applied. D20 SOP 24-2 AUTOCAD FORMA says the first weep is 4 inches
-      typical from the edge, with the others spaced equally between rivets
-      at 24 inches on center maximum. PANEL-FABRICATION-STANDARDS.md, scoped
-      to V.1.R, says the first weep is 1 inch after the starting double-rivet
-      pair and the last weep is 1 inch before the ending double-rivet pair.
-      Those V.1.R offsets are measured from the rivet layout, not from the
-      panel corner, and the first and last weeps stay anchored to the end
-      pairs. The 24 inch maximum is not part of this conflict. Both sources
-      keep it. See v1r.weep-spacing.
-    question: >
-      For V.1.R, is the first weep 1 inch past the starting double-rivet
-      pair, or 4 inches from the edge? Does the SOP's 4 inch start from the
-      edge still apply to panel types other than V.1.R?
+      Weeps are 1 inch from the last rivet hole of the double set of rivets.
+      The first weep is 1 inch after the starting double-rivet pair and the
+      last weep is 1 inch before the ending double-rivet pair. Those offsets
+      are measured from the rivet layout, not from the panel corner, and the
+      first and last weeps stay anchored to the end pairs. The SOP note that
+      said the first weep is 4 inches typical from the edge does not apply.
+      The 24 inch on-center maximum still applies. See v1r.weep-spacing.
+      Per dimensions.rivet-weep-schedule-all-panels, this schedule rule is
+      not limited to V.1.R.
     sources:
+      - file: Austin Durbin email 2026-11-05 (abd@art-form.com) via Sydney
+        drawing: n/a
+        location: >
+          Weeps are 1 in from the last rivet hole of the double set of rivets.
       - file: PANEL-FABRICATION-STANDARDS.md
         drawing: V.1.R
         location: >
@@ -136,4 +141,5 @@ rules:
         drawing: D20 SOP 24-2 AUTOCAD FORMA
         location: >
           Multileader on 0-TEXT, repeated: "FIRST WEEP FROM EDGE @ 4" TYP.
-          ALL OTHER WEEPS SPACED EQUALLY B/W RIVETS @ 24" OC MAX"
+          ALL OTHER WEEPS SPACED EQUALLY B/W RIVETS @ 24" OC MAX". Superseded
+          by Austin Durbin 2026-11-05 for the first-weep offset.

@@ -52,25 +52,23 @@ rules:
         location: Weep Standards, "Weep drill-center radius is 0.125 inches." Scoped to V.1.R.
 
   - id: dimensions.rivet-diameter
-    status: needs_confirmation
+    status: confirmed
+    confirmed_on: 2026-11-05
     statement: >
-      Shop drawings call the rivet out as .13, and Austin confirmed diameter
-      0.13 on 2026-10-09. That callout is on V.1.R-3D and is also labeled
-      ".13 RIVETS" on V.2.RB and V.2.RT sheets. For V.1.R,
-      PANEL-FABRICATION-STANDARDS.md states the rivet drill-center radius is
-      0.0625 inches, which is a 0.125 inch diameter. The SOP model space
-      matches that radius: 174 circles on ACM_Layer 4_Drill Centers_Rivet
-      Holes are radius 0.0625, and a block layer is named Circles_0.125.
-      The drawing callout Ø.13 is the likely two-decimal rounding of 0.125.
-      The V.1.R drill-center radius is recorded in v1r.rivet-drill-center.
-      Austin still has to confirm that the rounded callout and the drill
-      center are the same size, including on the RB and RT sheets this V.1.R
-      document does not cover.
-    question: >
-      For V.1.R, is the rivet drill center 0.125 inch diameter (0.0625 inch
-      radius), with the drawings' Ø.13 meaning 0.125 rounded? Do the Ø.13
-      RIVETS callouts on the V.2.RB and V.2.RT sheets use that same rounding?
+      All rivets are 0.125 inch diameter. Shop drawings call the rivet out as
+      .13 / Ø.13, including ".13 RIVETS" on V.2.RB and V.2.RT sheets and the
+      .13 callout on V.1.R-3D. That callout is the two-decimal rounding of
+      0.125. PANEL-FABRICATION-STANDARDS.md states the rivet drill-center
+      radius is 0.0625 inches (diameter 0.125). The SOP model space matches
+      that radius: 174 circles on ACM_Layer 4_Drill Centers_Rivet Holes are
+      radius 0.0625, and a block layer is named Circles_0.125. The V.1.R
+      drill-center radius is recorded in v1r.rivet-drill-center. Austin
+      Durbin confirmed on 2026-11-05 that all rivets are 0.125 inch diameter,
+      including the V.2.RB and V.2.RT Ø.13 callouts.
     sources:
+      - file: Austin Durbin email 2026-11-05 (abd@art-form.com) via Sydney
+        drawing: n/a
+        location: "Yes — all rivets are 0.125 in diameter."
       - file: Austin confirmation 2026-10-09
         drawing: n/a
         location: Diameter 0.13 rivets
@@ -127,20 +125,26 @@ rules:
         location: Source Observations, flange depth / edge dimension around 0.97 inches. Scoped to V.1.R.
 
   - id: dimensions.other-return-depth-0.75
-    status: needs_confirmation
+    status: confirmed
+    confirmed_on: 2026-11-05
     statement: >
-      On V.1.R the 0.75 inch dimension is the rivet start after the square
-      corner relief (v1r.rivet-start-offset). The .75 callout on V.1.R-3D
-      is the likely drawing of that offset, not a second flange size.
-      Other sheets still call out .75 beside a flange and are outside that
-      V.1.R rule: V.2.R.C2L (".75 X3"), V.2.RB.L1.WF.W2.C1L, and
-      V.2.RT.L1.A1.W1.C1L. The SOP typical-return note covers the 1 inch /
-      31/32 inch leg only.
-    question: >
-      Confirm that the .75 callout on V.1.R-3D is the rivet start measured
-      after the square corner relief. What is the .75 leg on the V.2.R,
-      V.2.RB, and V.2.RT sheets?
+      Rivet start from the edge is 0.75 inches as the standard. When a panel
+      has a mitered edge (typically multi-face), rivet start from the edge is
+      1.25 inches. The .75 callout on V.1.R-3D is that standard rivet start
+      after the square corner relief (v1r.rivet-start-offset), not a second
+      flange size. The same .75 / 1.25 rivet-start rule covers the .75
+      callouts on V.2.R.C2L (".75 X3"), V.2.RB.L1.WF.W2.C1L, and
+      V.2.RT.L1.A1.W1.C1L. The SOP typical-return note still covers the 1
+      inch / 31/32 inch flange leg only. Note: an earlier Foldr/SOP reading
+      swapped these numbers (corner-relief 1.25 / true-miter 0.75). The shop
+      answer wins for this repo; Foldr code reconciliation is out of scope
+      here.
     sources:
+      - file: Austin Durbin email 2026-11-05 (abd@art-form.com) via Sydney
+        drawing: n/a
+        location: >
+          0.75 in from the edge is the standard; changes to 1.25 in when a
+          panel has a mitered edge (typically multi-face).
       - file: PANEL-FABRICATION-STANDARDS.md
         drawing: V.1.R
         location: Rivet / Fastener Standards, rivet start offset 0.75 inches after the square corner / route-relief offset
@@ -234,29 +238,25 @@ rules:
         location: Multileader on 0-TEXT "ROUTE LINE LAYER EXTENDS TO BOUNDARY OF CUT LINE LAYER"
 
   - id: dimensions.rivet-spacing-schedule
-    status: needs_confirmation
+    status: confirmed
+    confirmed_on: 2026-11-05
     statement: >
-      The SOP multileaders give three rivet bands, copied here as written.
-      Single rivets at 16 inches on center are good for panels under 24 inches
-      wide, under 120 inches long, and under 20 square feet. Double rivets at
-      16 inches on center are good for panels under 48 inches wide, under 120
-      inches long, and between 20 and 40 square feet. Double rivets at 12
-      inches on center are good for panels over 48 inches wide, over 120
-      inches long, and over 40 square feet. The remainder to the end of the
-      flange must be under 16 inches from the last rivet. Those bands do not
-      name mixed width and length, or panels on 24, 48, 120, 20 square feet,
-      or 40 square feet. They are not the V.1.R schedule. V.1.R is
-      v1r.rivet-schedule: under 48 inches wide and under 120 inches long, a
-      double pair at each end and singles at 16 inches on center between;
-      larger panels, a double pair at every station. The SOP's under-24-inch
-      single-only band and its 12-inch double band are not in that V.1.R rule.
-    question: >
-      Outside V.1.R, do these three SOP bands still apply on a boundary
-      (exactly 24, 48, or 120 inches, or 20 or 40 square feet) and when width
-      and length fall in different bands? Should the under-24-inch single-only
-      band and the 12-inch double band be retired where they disagree with
-      the V.1.R standard?
+      Rivet and weep schedule rules apply to all panel types, not only V.1.R.
+      The governing layout is v1r.rivet-schedule: under 48 inches wide and
+      under 120 inches long, a double pair at each end and singles at 16
+      inches on center between; larger panels, a double pair at every station.
+      The SOP multileaders still list three bands (under-24 single-only at 16
+      inches, under-48 doubles at 16 inches with the 20–40 square foot note,
+      and over-48 / over-120 / over-40 square foot doubles at 12 inches), but
+      those SOP-only bands are not a separate outside-V.1.R schedule. Austin
+      Durbin confirmed on 2026-11-05 that the rules apply to all panel types.
+      Exact 48 / 120 edge cases and one-limit-over panels stay open in
+      v1r.rivet-schedule-boundaries. See also
+      dimensions.rivet-weep-schedule-all-panels.
     sources:
+      - file: Austin Durbin email 2026-11-05 (abd@art-form.com) via Sydney
+        drawing: n/a
+        location: "Yes — the rules apply to all panel types."
       - file: D20 SOP 24-2 AUTOCAD FORMA.dxf
         drawing: D20 SOP 24-2 AUTOCAD FORMA
         location: >
@@ -271,21 +271,41 @@ rules:
           Standards, small-panel singles between end pairs; larger panels,
           a double pair at every station.
 
+  - id: dimensions.rivet-weep-schedule-all-panels
+    status: confirmed
+    confirmed_on: 2026-11-05
+    statement: >
+      Rivet and weep schedule rules that were first captured from the V.1.R
+      fabrication standard apply to all panel types. They are not limited to
+      V.1.R flat ACM panels. Exact schedule boundaries at 48 inches wide, 120
+      inches long, or when only one limit is exceeded remain
+      v1r.rivet-schedule-boundaries.
+    sources:
+      - file: Austin Durbin email 2026-11-05 (abd@art-form.com) via Sydney
+        drawing: n/a
+        location: "Yes — the rules apply to all panel types."
+      - file: PANEL-FABRICATION-STANDARDS.md
+        drawing: V.1.R
+        location: >
+          V.1.R Applicability and Rivet / Fastener Standards schedule bands,
+          now shop-confirmed for every panel type.
+
   - id: dimensions.rivet-sixteen-oc-min-callout
-    status: needs_confirmation
+    status: confirmed
+    confirmed_on: 2026-11-05
     statement: >
       V.1.R-3D calls out "16 inch OC MIN" on the same sheet as .13, .25, .97,
-      and .75. For V.1.R that 16 inch spacing is the intermediate rivet
-      station, not the weep spacing. PANEL-FABRICATION-STANDARDS.md spaces
-      those stations at 16 inches on center when that fits, and equalizes
-      them when it does not. It does not say an equalized rivet gap must stay
-      at or under 16 inches. Weep equalization on the same document must not
-      exceed 24 inches. The callout's word MIN is the part that is still open.
-    question: >
-      On V.1.R, does MIN on the "16 inch OC MIN" callout mean an equalized
-      rivet gap must not exceed 16 inches, or is 16 inches only the target
-      spacing when it fits?
+      and .75. That 16 inch spacing is the intermediate rivet station, not
+      the weep spacing. Stations are 16 inches on center when that fits, and
+      equalized when it does not. MIN means an equalized rivet gap must not
+      exceed 16 inches. Weep equalization must not exceed 24 inches. See
+      v1r.rivet-intermediate-equalize.
     sources:
+      - file: Austin Durbin email 2026-11-05 (abd@art-form.com) via Sydney
+        drawing: n/a
+        location: >
+          Yes — "16\" OC MIN" requires the equalized rivet gap to stay at or
+          under 16 inches.
       - file: V.1.R-3D.pdf
         drawing: V.1.R-3D
         location: Callout 16" OC MIN
@@ -306,9 +326,9 @@ rules:
       Rivet pilots start at the center of the flange and move outward. Rivet
       pilots align across flanges. One SOP leader says "STANDARD RIVER PILOT
       OFFSET FROM INSIDE CORNER" and does not give the offset distance.
-      For V.1.R the stated start is 0.75 inches after the square corner
-      relief (v1r.rivet-start-offset), which is measured after the relief
-      rather than from the inside corner. The unlabeled .48 on V.1.R-3D
+      Standard rivet start is 0.75 inches from the edge; mitered-edge rivet
+      start is 1.25 inches (v1r.rivet-start-offset /
+      dimensions.other-return-depth-0.75). The unlabeled .48 on V.1.R-3D
       remains dimensions.rivet-inside-corner-offset.
     sources:
       - file: D20 SOP 24-2 AUTOCAD FORMA.dxf
@@ -321,16 +341,21 @@ rules:
   - id: dimensions.rivet-inside-corner-offset
     status: needs_confirmation
     statement: >
-      For V.1.R, rivets start 0.75 inches after the square corner relief
-      (v1r.rivet-start-offset). That is not the unlabeled .48 on V.1.R-3D.
-      PANEL-FABRICATION-STANDARDS.md does not mention .48. The SOP still says
-      "STANDARD RIVER PILOT OFFSET FROM INSIDE CORNER" and gives no distance.
-      .48 is not recorded as either offset.
+      Standard rivet start is 0.75 inches from the edge, or 1.25 inches on a
+      mitered edge (v1r.rivet-start-offset /
+      dimensions.other-return-depth-0.75). That is not the unlabeled .48 on
+      V.1.R-3D. PANEL-FABRICATION-STANDARDS.md does not mention .48. The SOP
+      still says "STANDARD RIVER PILOT OFFSET FROM INSIDE CORNER" and gives
+      no distance. .48 is not recorded as either offset. Austin's 2026-11-05
+      email did not address .48.
     question: >
       Is the unlabeled .48 on V.1.R-3D a different dimension from the 0.75
-      inch post-relief rivet start? Does the SOP's undimensioned inside-corner
-      offset still apply on panels other than V.1.R?
+      inch (or 1.25 inch mitered) rivet start? Does the SOP's undimensioned
+      inside-corner offset still apply?
     sources:
+      - file: Austin Durbin email 2026-11-05 (abd@art-form.com) via Sydney
+        drawing: n/a
+        location: Confirmed 0.75 / 1.25 rivet-start values; no answer on .48
       - file: PANEL-FABRICATION-STANDARDS.md
         drawing: V.1.R
         location: Rivet start offset 0.75 inches after the square corner / route-relief offset. No .48 dimension.
@@ -362,12 +387,13 @@ rules:
   - id: dimensions.v1r3d-one-inch-callout
     status: needs_confirmation
     statement: >
-      V.1.R uses 1 inch for two fastener dimensions: the gap inside a
-      double-rivet pair (dimensions.double-rivet-pair-spacing), and the weep
-      offset past the end pair (drainage.first-weep-four-inches, which
-      conflicts with the SOP). V.1.R-3D calls out 1.00 twice, beside .97 and
-      .75. Those callouts are not recorded as a nominal 1 inch return. The
-      typical return remains 31/32 inch.
+      Two fastener dimensions use 1 inch: the gap inside a double-rivet pair
+      (dimensions.double-rivet-pair-spacing), and the weep offset from the
+      last rivet hole of the end double set
+      (drainage.first-weep-four-inches, confirmed 2026-11-05). V.1.R-3D
+      calls out 1.00 twice, beside .97 and .75. Those callouts are not
+      recorded as a nominal 1 inch return. The typical return remains 31/32
+      inch. Austin's 2026-11-05 email did not say which 1.00 callout is which.
     question: >
       Which of the two 1.00 callouts on V.1.R-3D is the double-rivet pair
       gap, and which is the weep offset from that pair?
@@ -380,6 +406,11 @@ rules:
         location: >
           Double-rivet holes 1 inch apart. First weep 1 inch after the
           starting double-rivet pair. Last weep 1 inch before the ending pair.
+      - file: Austin Durbin email 2026-11-05 (abd@art-form.com) via Sydney
+        drawing: n/a
+        location: >
+          Confirmed weep offset of 1 in from the last rivet hole of the
+          double set; no answer mapping the two 1.00 callouts.
       - file: D20 SOP 24-2 AUTOCAD FORMA.dxf
         drawing: D20 SOP 24-2 AUTOCAD FORMA
         location: "TYPICAL 1\" RETURNS ARE 31/32\""

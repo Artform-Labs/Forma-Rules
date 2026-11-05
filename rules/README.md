@@ -11,6 +11,6 @@ Each file is a list under `rules`. Every record has:
 
 A `needs_confirmation` record also has `question`, which is the open point for Austin. A conflict between sources is stored as `needs_confirmation`. It is not resolved by picking a value.
 
-`confirmed_on` is set only when Austin confirmed the rule on 2026-10-09 and the drawings do not contradict it.
+`confirmed_on` is set when Austin confirmed the rule (2026-10-09 or 2026-11-05) and the drawings do not contradict it.
 
-`PANEL-FABRICATION-STANDARDS.md` from Auditor is cited for V.1.R only. Rules that come from it say so in the statement and in `sources`. The Foldr V1.4 checklist was not in that file. It is outdated on return-bottom weep location, so it was not used. The return-bottom weep rule here is Austin's 2026-10-09 confirmation.
+`PANEL-FABRICATION-STANDARDS.md` from Auditor was the source for many V.1.R rivet and weep records. Austin Durbin (abd@art-form.com), via Sydney on 2026-11-05, confirmed that rivet and weep schedule rules apply to all panel types. The Foldr V1.4 checklist was not in that Auditor file. It is outdated on return-bottom weep location, so it was not used. The return-bottom weep rule here is Austin's 2026-10-09 confirmation. Where Austin's 2026-11-05 shop answer conflicts with an earlier Foldr/SOP reading, the shop answer wins for this repo.
