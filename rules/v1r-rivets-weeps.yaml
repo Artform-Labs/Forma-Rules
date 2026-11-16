@@ -116,9 +116,8 @@ rules:
       pattern runs start pair, 16 inches, single, 16 inches, more singles as
       needed, end pair. Rivets are still required on a small panel. The size
       note does not turn them off. Panels that meet only one of the two
-      limits, or that land on exactly 48 or 120 inches, are not given a third
-      band in the source. They are not assigned here
-      (v1r.rivet-schedule-boundaries).
+      limits, or that land on exactly 48 or 120 inches, are larger panels
+      (v1r.rivet-schedule-boundaries, ruled 2026-11-16).
     sources:
       - file: Austin Durbin email 2026-11-05 (abd@art-form.com) via Sydney
         drawing: n/a
@@ -134,20 +133,21 @@ rules:
           single, 16 inches, more singles, end pair.
 
   - id: v1r.rivet-schedule-boundaries
-    status: needs_confirmation
+    status: confirmed
+    confirmed_on: 2026-11-16
     statement: >
-      v1r.rivet-schedule states the two bands written down: both width under
-      48 inches and length under 120 inches, versus larger. Those schedule
-      rules apply to all panel types
-      (dimensions.rivet-weep-schedule-all-panels). A panel on exactly 48 or
-      120 inches, or a panel under only one of those limits, is not named.
-      Austin's 2026-11-05 email confirmed all-panel applicability and did
-      not give the exact 48 / 120 or one-limit-over edge cases.
-    question: >
-      Does a panel that is exactly 48 inches wide, exactly 120 inches long,
-      or under only one of those two limits use end doubles with intermediate
-      singles, or a double pair at every station?
+      A panel is small only when its width is under 48 inches AND its length
+      is under 120 inches. Any panel with width 48 inches or more, OR length
+      120 inches or more, is a larger panel and gets a double-rivet pair at
+      every station (v1r.rivet-schedule). That covers a panel exactly 48
+      inches wide, exactly 120 inches long, and a panel under only one of the
+      two limits. This boundary is Sydney's D20 ruling of 2026-11-16; Austin's
+      2026-11-05 email confirmed all-panel applicability but did not give the
+      edge cases.
     sources:
+      - file: Sydney (D20) ruling 2026-11-16, recorded from the Auditor rivet-rule review
+        drawing: n/a
+        location: "Larger panel = W >= 48 or L >= 120 (use the SOP)."
       - file: Austin Durbin email 2026-11-05 (abd@art-form.com) via Sydney
         drawing: n/a
         location: >
@@ -158,7 +158,6 @@ rules:
         location: >
           The small-panel condition is the under-48-inch width and
           under-120-inch length note. Larger panels are the other sentence.
-          Exact boundaries and mixed extents are not written out.
 
   - id: v1r.rivet-intermediate-equalize
     status: confirmed
